@@ -7,40 +7,42 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <!-- Loading Screen -->
+  <!-- Loader -->
   <div id="loader">
     <div class="spinner"></div>
     <p>Loading Game...</p>
   </div>
 
-  <!-- Landing Page -->
-  <div id="landing-screen">
+  <!-- Landing screen -->
+  <div id="landing-screen" style="display: none;">
     <h1>Chasing Game</h1>
     <button id="start-button">Start Game</button>
   </div>
 
-  <!-- Game UI -->
+  <!-- Game container -->
   <div id="game-container" style="display: none;">
     <canvas id="gameCanvas"></canvas>
     <div id="score">Score: <span id="scoreValue">0</span></div>
   </div>
 
-  <script type="module">
-    // Delay to simulate loading
-    window.onload = () => {
-      setTimeout(() => {
-        document.getElementById("loader").style.display = "none";
-        document.getElementById("landing-screen").style.display = "flex";
-      }, 1000);
-
-      document.getElementById("start-button").onclick = async () => {
-        document.getElementById("landing-screen").style.display = "none";
-        document.getElementById("game-container").style.display = "block";
-        const module = await import("./js/main.js");
-        module.startGame();
-        // main.js already calls game.start()
-      };
-    };
-  </script>
+  <!-- Your script -->
+  <script type="module"> ...as shown above... </script>
 </body>
+
+  <script type="module">
+  window.onload = () => {
+    // Hide loader and show landing screen
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("landing-screen").style.display = "flex";
+
+    // Handle Start button click
+    document.getElementById("start-button").addEventListener("click", async () => {
+      document.getElementById("landing-screen").style.display = "none";
+      document.getElementById("game-container").style.display = "block";
+      const module = await import("./js/main.js");
+      module.startGame();
+    });
+  };
+</script>
+
 </html>

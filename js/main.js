@@ -1,3 +1,4 @@
+// js/main.js
 import { Game } from './game.js';
 
 export function startGame() {
