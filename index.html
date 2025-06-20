@@ -37,6 +37,7 @@
         document.getElementById("landing-screen").style.display = "none";
         document.getElementById("game-container").style.display = "block";
         const module = await import("./js/main.js");
+        module.startGame();
         // main.js already calls game.start()
       };
     };

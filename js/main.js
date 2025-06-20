@@ -1,6 +1,6 @@
 import { Game } from './game.js';
 
-window.onload = () => {
+export function startGame() {
     const game = new Game('gameCanvas');
     game.start();
-};
+}
