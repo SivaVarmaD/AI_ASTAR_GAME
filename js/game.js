@@ -60,10 +60,22 @@ export class Game {
     }
 
     start() {
-        this.startTime = Date.now();
-        this.lastScoreUpdateTime = Date.now();
-        this.gameLoop();
+    this.startTime = Date.now();
+    this.lastScoreUpdateTime = Date.now();
+    this.startNPCSpawner();
+    this.gameLoop();
+}
+
+    startNPCSpawner() {
+        this.npcSpawnInterval = setInterval(() => {
+            const newNPC = new NPC(
+                Math.random() * this.width,
+                Math.random() * this.height
+            );
+            this.npcs.push(newNPC);
+        }, 3000);
     }
+
 
     gameLoop() {
         if (this.gameOver) return;
@@ -153,6 +165,7 @@ export class Game {
         for (let npc of this.npcs) {
             if (this.player.collidesWith(npc)) {
                 this.gameOver = true;
+                clearInterval(this.npcSpawnInterval);
                 alert(`Game Over! Your score: ${this.score}`);
                 return;
             }
