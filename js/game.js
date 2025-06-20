@@ -7,8 +7,8 @@ export class Game {
     constructor(canvasId) {
         this.canvas = document.getElementById(canvasId);
         this.ctx = this.canvas.getContext('2d');
-        this.width = 800;
-        this.height = 600;
+        this.width = window.innerWidth;
+        this.height = window.innerHeight;
         this.cellSize = 40;
         this.player = new Player(this.width / 2, this.height / 2);
         this.npcs = [];
@@ -18,7 +18,12 @@ export class Game {
         this.score = 0;
         this.lastScoreUpdateTime = 0;
         this.chaseRadius = 200; // Radius within which NPCs are considered to be chasing
-
+        window.addEventListener('resize', () => {
+            this.width = window.innerWidth;
+            this.height = window.innerHeight;
+            this.canvas.width = this.width;
+            this.canvas.height = this.height;
+        });
         this.canvas.width = this.width;
         this.canvas.height = this.height;
 
