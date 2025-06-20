@@ -1,16 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chase Game</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chasing Game</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    <div id="game-container">
-        <canvas id="gameCanvas"></canvas>
-        <div id="score">Score: <span id="scoreValue">0</span></div>
-    </div>
-    <script type="module" src="js/main.js"></script>
+  <!-- Loading Screen -->
+  <div id="loader">
+    <div class="spinner"></div>
+    <p>Loading Game...</p>
+  </div>
+
+  <!-- Landing Page -->
+  <div id="landing-screen">
+    <h1>Chasing Game</h1>
+    <button id="start-button">Start Game</button>
+  </div>
+
+  <!-- Game UI -->
+  <div id="game-container" style="display: none;">
+    <canvas id="gameCanvas"></canvas>
+    <div id="score">Score: <span id="scoreValue">0</span></div>
+  </div>
+
+  <script type="module">
+    // Delay to simulate loading
+    window.onload = () => {
+      setTimeout(() => {
+        document.getElementById("loader").style.display = "none";
+        document.getElementById("landing-screen").style.display = "flex";
+      }, 1000);
+
+      document.getElementById("start-button").onclick = async () => {
+        document.getElementById("landing-screen").style.display = "none";
+        document.getElementById("game-container").style.display = "block";
+        const module = await import("./js/main.js");
+        // main.js already calls game.start()
+      };
+    };
+  </script>
 </body>
 </html>
